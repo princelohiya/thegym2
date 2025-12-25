@@ -1,132 +1,247 @@
-import { fadeUp, fade } from "../config/motionConfig";
-import { MapPin, Clock, Phone, Mail } from "lucide-react";
+import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  MapPin,
+  Clock,
+  Phone,
+  Mail,
+  Send,
+  ArrowRight,
+  Crosshair,
+} from "lucide-react";
 import { BRAND } from "../config/BrandConfig";
 
 const ContactUs = ({ isMapError }) => {
+  const [focusedField, setFocusedField] = useState(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section id="contact" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Get <span className="text-primary">Started</span>
-          </h2>
-          <p className="text-neutral-400 text-lg">
-            Visit us or drop a message. We're here to help!
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="bg-neutral-950 p-8 rounded-lg border border-neutral-900">
-            <h3 className="text-2xl font-bold mb-6">Quick Inquiry</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Name</label>
-                <input
-                  type="text"
-                  placeholder="Your full name"
-                  className="w-full bg-black border border-neutral-800 rounded-lg px-4 py-3 focus:hover:bg-primaryHover focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Phone</label>
-                <input
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  className="w-full bg-black border border-neutral-800 rounded-lg px-4 py-3 focus:hover:bg-primaryHover focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Fitness Goal
-                </label>
-                <select className="w-full bg-black border border-neutral-800 rounded-lg px-4 py-3 focus:hover:bg-primaryHover focus:outline-none transition-colors">
-                  <option>Select your goal</option>
-                  <option>Weight Loss</option>
-                  <option>Muscle Gain</option>
-                  <option>General Fitness</option>
-                  <option>Athletic Performance</option>
-                </select>
-              </div>
-              <button
-                onClick={() =>
-                  alert("Form submission is UI only. Connect to your backend!")
-                }
-                className="w-full bg-primary text-black py-3 rounded-lg font-bold hover:bg-primaryHover transition-all"
-              >
-                Submit Inquiry
-              </button>
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="bg-neutral-950 p-8 rounded-lg border border-neutral-900">
-              <h3 className="text-2xl font-bold mb-6">Visit Us</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-medium">Address</div>
-                    <div className="text-neutral-400">
-                      123 Fitness Street, University Area, City - 560001
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Clock className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-medium">Timings</div>
-                    <div className="text-neutral-400">
-                      Mon - Sat: 5:00 AM - 11:00 PM
-                    </div>
-                    <div className="text-neutral-400">
-                      Sun: 6:00 AM - 9:00 PM
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Phone className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-medium">Phone</div>
-                    <div className="text-neutral-400">+91 {BRAND.phone}</div>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Mail className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <div className="font-medium">Email</div>
-                    <div className="text-neutral-400">{BRAND.email}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Location Map */}
-            <div className="bg-neutral-900 rounded-lg overflow-hidden h-64">
-              {isMapError ? (
-                <div className="w-full h-full flex flex-col items-center justify-center space-y-3">
-                  <MapPin className="w-16 h-16 text-primary" />
-                  <p className="text-neutral-400 text-sm px-4 text-center">
-                    Map is currently unavailable. Showing location icon instead.
-                  </p>
-                </div>
-              ) : (
-                <iframe
-                  title={`${BRAND.name} Location`}
-                  className="w-full h-full border-0"
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.518157327004!2d77.69504171094573!3d27.577460831109445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736f99c2d2e329%3A0x4294ba7a839c4126!2sROYAL%20FITNESS%20GYM!5e0!3m2!1sen!2sin!4v1766046398103!5m2!1sen!2sin"
-                  onError={() => setIsMapError(true)}
-                />
-              )}
-            </div>
-          </div>
-        </div>
+    <section
+      id="contact"
+      className="relative pt-24 pb-10 bg-neutral-950 overflow-hidden"
+    >
+      {/* Background Decor */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px]" />
       </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-16 lg:gap-24"
+        >
+          {/* LEFT: THE COMMS FORM */}
+          <div className="space-y-12">
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center gap-2 mb-4 text-primary text-xs font-bold tracking-[0.2em] uppercase">
+                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                System Online
+              </div>
+              <h2 className="text-5xl md:text-6xl font-black text-white uppercase italic tracking-tighter mb-6">
+                Establish <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-600">
+                  Comms
+                </span>
+              </h2>
+              <p className="text-neutral-400 text-lg max-w-md">
+                Ready to deploy? Send us your coordinates and we'll initiate
+                your onboarding protocol.
+              </p>
+            </motion.div>
+
+            <motion.form variants={itemVariants} className="space-y-8">
+              {[
+                {
+                  label: "Operative Name",
+                  type: "text",
+                  placeholder: "JOHN DOE",
+                },
+                {
+                  label: "Contact Frequency",
+                  type: "tel",
+                  placeholder: "+91 98765 43210",
+                },
+              ].map((field, idx) => (
+                <div key={idx} className="relative">
+                  <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 block">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    onFocus={() => setFocusedField(field.label)}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-medium text-white placeholder-neutral-700 focus:outline-none focus:border-primary transition-all rounded-none"
+                  />
+                  {/* Animated Underline */}
+                  <div
+                    className={`absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300 ${
+                      focusedField === field.label ? "w-full" : "w-0"
+                    }`}
+                  />
+                </div>
+              ))}
+
+              <div className="relative">
+                <label className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2 block">
+                  Mission Objective
+                </label>
+                <select className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-medium text-white focus:outline-none focus:border-primary transition-all rounded-none appearance-none cursor-pointer">
+                  <option className="bg-neutral-900">Muscle Hypertrophy</option>
+                  <option className="bg-neutral-900">Fat Loss Protocol</option>
+                  <option className="bg-neutral-900">Endurance Training</option>
+                  <option className="bg-neutral-900">
+                    General Conditioning
+                  </option>
+                </select>
+                <div className="absolute right-0 top-10 pointer-events-none text-neutral-500">
+                  ▼
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="group relative w-full py-5 bg-white text-black font-black uppercase italic tracking-wider text-lg overflow-hidden transition-all hover:bg-primary"
+              >
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  Submit Inquiry{" "}
+                  <Send
+                    size={18}
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                  />
+                </span>
+              </button>
+            </motion.form>
+          </div>
+
+          {/* RIGHT: INTEL & MAP */}
+          <motion.div
+            variants={itemVariants}
+            className="space-y-12 flex flex-col justify-between"
+          >
+            {/* Contact Intel Grid */}
+            <div className="grid sm:grid-cols-2 gap-8">
+              <div className="p-6 border border-white/5 bg-neutral-900/30 hover:border-primary/30 transition-colors group">
+                <MapPin className="text-primary mb-4 w-8 h-8 group-hover:scale-110 transition-transform" />
+                <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
+                  HQ Coordinates
+                </h4>
+                <p className="text-white font-medium leading-relaxed">
+                  123 Fitness Street,
+                  <br /> University Area,
+                  <br /> City - 560001
+                </p>
+              </div>
+
+              <div className="p-6 border border-white/5 bg-neutral-900/30 hover:border-primary/30 transition-colors group">
+                <Clock className="text-primary mb-4 w-8 h-8 group-hover:scale-110 transition-transform" />
+                <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
+                  Operational Hours
+                </h4>
+                <p className="text-white font-medium">05:00 - 23:00</p>
+                <p className="text-neutral-500 text-sm mt-1">
+                  Daily Operations
+                </p>
+              </div>
+
+              <div className="p-6 border border-white/5 bg-neutral-900/30 hover:border-primary/30 transition-colors group">
+                <Phone className="text-primary mb-4 w-8 h-8 group-hover:scale-110 transition-transform" />
+                <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
+                  Comms Line
+                </h4>
+                <p className="text-white font-medium text-lg">
+                  +91 {BRAND.phone}
+                </p>
+              </div>
+
+              <div className="p-6 border border-white/5 bg-neutral-900/30 hover:border-primary/30 transition-colors group">
+                <Mail className="text-primary mb-4 w-8 h-8 group-hover:scale-110 transition-transform" />
+                <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
+                  Digital Mail
+                </h4>
+                <p className="text-white font-medium truncate">{BRAND.email}</p>
+              </div>
+            </div>
+
+            {/* Tactical Map Container */}
+            <div className="relative w-full h-64 border border-white/10 group overflow-hidden">
+              {/* HUD Overlays */}
+              <div className="absolute top-0 left-0 p-2 z-10 border-t-2 border-l-2 border-primary w-8 h-8" />
+              <div className="absolute bottom-0 right-0 p-2 z-10 border-b-2 border-r-2 border-primary w-8 h-8" />
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Crosshair
+                  className="text-primary w-12 h-12 animate-spin-slow"
+                  strokeWidth={1}
+                />
+              </div>
+
+              {/* The Map */}
+              <div className="w-full h-full grayscale invert-[.1] contrast-125 hover:grayscale-0 hover:invert-0 transition-all duration-700">
+                {isMapError ? (
+                  <div className="w-full h-full flex items-center justify-center bg-neutral-900 text-neutral-500">
+                    <span className="text-xs font-mono uppercase">
+                      Map Data Offline
+                    </span>
+                  </div>
+                ) : (
+                  <iframe
+                    title={`${BRAND.name} Location`}
+                    className="w-full h-full border-0"
+                    loading="eager"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed?pb=!4v1703512800000!6m8!1m7!1s0x390d1ef41c08fd05:0xf287f559941de04!2m2!1d28.495753!2d77.1441903!3f0!4f0!5f0.7820865974627469"
+                  />
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* --- FOOTER SECTION INTEGRATED --- */}
+      <footer className="mt-24 pt-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className="font-black italic text-xl text-white uppercase tracking-tighter">
+              {BRAND.name}
+            </span>
+            <span className="text-xs text-neutral-500">© 2025</span>
+          </div>
+
+          <div className="flex gap-6">
+            {["Instagram", "Twitter", "YouTube"].map((social) => (
+              <a
+                key={social}
+                href=""
+                className="text-xs font-bold text-neutral-500 uppercase tracking-widest hover:text-primary transition-colors"
+              >
+                {social}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </section>
   );
 };
