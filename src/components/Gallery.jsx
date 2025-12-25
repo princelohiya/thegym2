@@ -44,14 +44,14 @@ const galleryItems = [
     type: "video", // <--- Set type to video
     src: video6, // <--- Video Source
     poster: gym2, // <--- Image to show while loading
-    tag: "STRENGTH ZONE",
+    tag: "CARDIO DECK",
     cam: "LIVE-02",
   },
   {
     type: "video", // <--- Set type to video
     src: video4, // <--- Video Source
     poster: gym2, // <--- Image to show while loading
-    tag: "STRENGTH ZONE",
+    // tag: "STRENGTH ZONE",
     cam: "LIVE-02",
   },
   {
@@ -65,14 +65,14 @@ const galleryItems = [
     type: "video", // <--- Set type to video
     src: video5, // <--- Video Source
     poster: gym2, // <--- Image to show while loading
-    tag: "STRENGTH ZONE",
+    tag: "CARDIO DECK",
     cam: "LIVE-02",
   },
   {
     type: "video", // <--- Set type to video
     src: video3, // <--- Video Source
     poster: gym2, // <--- Image to show while loading
-    tag: "STRENGTH ZONE",
+    // tag: "STRENGTH ZONE",
     cam: "LIVE-02",
   },
 
@@ -86,20 +86,17 @@ const galleryItems = [
   {
     type: "image",
     src: gym7,
-    tag: "LOCKER ROOMS",
     cam: "CAM-06",
   },
   {
     type: "image",
     src: gym19,
-    tag: "LOCKER ROOMS",
     cam: "CAM-06",
   },
 
   {
     type: "image",
     src: gym17,
-    tag: "LOCKER ROOMS",
     cam: "CAM-06",
   },
 ];

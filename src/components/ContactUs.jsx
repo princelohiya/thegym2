@@ -144,12 +144,10 @@ const ContactUs = ({ isMapError }) => {
               <div className="p-6 border border-white/5 bg-neutral-900/30 hover:border-primary/30 transition-colors group">
                 <MapPin className="text-primary mb-4 w-8 h-8 group-hover:scale-110 transition-transform" />
                 <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
-                  HQ Coordinates
+                  Address Line
                 </h4>
                 <p className="text-white font-medium leading-relaxed">
-                  123 Fitness Street,
-                  <br /> University Area,
-                  <br /> City - 560001
+                  {BRAND.address}
                 </p>
               </div>
 
@@ -158,7 +156,11 @@ const ContactUs = ({ isMapError }) => {
                 <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-2">
                   Operational Hours
                 </h4>
-                <p className="text-white font-medium">05:00 - 23:00</p>
+                <p className="text-white font-medium">
+                  Mon - Sat
+                  <br />
+                  05:00 - 22:00
+                </p>
                 <p className="text-neutral-500 text-sm mt-1">
                   Daily Operations
                 </p>
@@ -196,7 +198,7 @@ const ContactUs = ({ isMapError }) => {
               </div>
 
               {/* The Map */}
-              <div className="w-full h-full grayscale invert-[.1] contrast-125 hover:grayscale-0 hover:invert-0 transition-all duration-700">
+              <div className="w-full h-full grayscale-0 opacity-100 invert-[.1] contrast-125 hover:invert-0 transition-all duration-700">
                 {isMapError ? (
                   <div className="w-full h-full flex items-center justify-center bg-neutral-900 text-neutral-500">
                     <span className="text-xs font-mono uppercase">
@@ -209,7 +211,7 @@ const ContactUs = ({ isMapError }) => {
                     className="w-full h-full border-0"
                     loading="eager"
                     allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
+                    referrerPolicy="no-referrer-when-downgrade grayscale-0 opacity-100"
                     src="https://www.google.com/maps/embed?pb=!4v1703512800000!6m8!1m7!1s0x390d1ef41c08fd05:0xf287f559941de04!2m2!1d28.495753!2d77.1441903!3f0!4f0!5f0.7820865974627469"
                   />
                 )}
